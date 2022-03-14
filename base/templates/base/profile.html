@@ -16,14 +16,18 @@
           </div>
         </div>
         <div class="profile__info">
-          <h3>{{user.name}}</h3>
+          {% if user.name %}
+            <h3>{{user.name}}</h3>
+          {% else %}
+            <h3>{{user.username}}</h3>
+          {% endif %}
           <p>@{{user.username}}</p>
           {% if request.user == user %}
-          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">ویرایش پروفایل</a>
           {% endif %}
         </div>
         <div class="profile__about">
-          <h3>About</h3>
+          <h3>درباره</h3>
           <p>
             {{user.bio}}
           </p>
@@ -32,7 +36,11 @@
 
       <div class="roomList__header">
         <div>
-          <h2>Study Rooms Hosted by dennis_ivy</a>
+          {% if user.name %}
+            <h2>اتاق های در با مالکیت {{user.name}}</a>
+          {% else %}
+            <h2>اتاق های در با مالکیت {{user.username}}</h2>
+          {% endif %}
           </h2>
         </div>
       </div>

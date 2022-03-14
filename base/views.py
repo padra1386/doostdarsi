@@ -36,7 +36,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Username OR password does not exit')
+            messages.error(request, 'نام کاربری یا رمز عبور ناموجود است')
 
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
@@ -51,15 +51,14 @@ def registerPage(request):
     form = MyUserCreationForm()
 
     if request.method == 'POST':
-        form = MyUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'An error occurred during registration')
+        username = request.POST.get('username').lower()
+        email = request.POST.get('email').lower()
+        password = request.POST.get('password')
+        user = User.objects.create_user(username, email, password)
+        user.save()
+        login(request, user)
+        return redirect('home')
+
 
     return render(request, 'base/login_register.html', {'form': form})
 
@@ -202,3 +201,7 @@ def topicsPage(request):
 def activityPage(request):
     room_messages = Message.objects.all()
     return render(request, 'base/activity.html', {'room_messages': room_messages})
+
+
+def aboutPage(request):
+    return render(request, 'base/about.html')

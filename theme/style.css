@@ -27,6 +27,10 @@
   font-size: inherit;
 }
 
+.team-card {
+  border: solid 2px #3f4156;
+}
+
 html {
   font-size: 56.25%;
 }
