@@ -20,6 +20,7 @@
             </svg>
           </a>
           <h3>اتاق درس</h3>
+            <a href="{% url 'info' pageInfo %}">راهنما</a>
         </div>
         {% if room.host == request.user %}
         <div class="room__topRight">

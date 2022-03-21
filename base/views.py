@@ -92,6 +92,7 @@ def room(request, pk):
     room = Room.objects.get(id=pk)
     room_messages = room.message_set.all()
     participants = room.participants.all()
+    pageInfo = "تو این صفحه اگر مالک اتاق باشی میتونی با کلیک کردن روی قلم بالای صفحه اتاقت رو ویرایش کنی و با کلیک روی علامت x میتونی اتاق خودت رو حذف کنی. اگر مالک اتاق نباشی میتونی به سوال های دیگران جواب بدی و در سم چپ میتونی کسانی که در این اتق شرکت کردند رو ببینی."
 
     if request.method == 'POST':
         message = Message.objects.create(
@@ -102,8 +103,9 @@ def room(request, pk):
         room.participants.add(request.user)
         return redirect('room', pk=room.id)
 
+
     context = {'room': room, 'room_messages': room_messages,
-               'participants': participants}
+               'participants': participants, 'pageInfo': pageInfo}
     return render(request, 'base/room.html', context)
 
 
