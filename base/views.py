@@ -77,9 +77,10 @@ def home(request):
     room_messages = Message.objects.filter(
         Q(room__topic__name__icontains=q))[0:3]
     pageInfo = "در صفحه اصلی میتونید با کلیک کردن روی دکمه درست کردن اتاق صفحه ای دیگر باز میشه که میتونید موضوع سوال خود سوال خود و توضیحات بیشتر رو وارد کنید. در صفحه اصلی میتونید اتاق های دیگران را ببینید و به سوال هایشان جواب بدید. سمت چپ فعالیت های اخیر را میتونید ببینید و در سمت راست دسته بندی سوال ها و تعداد اتاق های موجود برای هر کدام در سمت بالا با کلیک روی ورود میتونید وارد حساب خود بشید و اگر حساب ندارید میتونی برای خودت حساب درس کنی و همچین در بالای صفحه بر اساس دسته بندی ها و نام اتاق ها و توضیحات ان ها جستجو کنی و اتاق مورد نظرت رو پیدا کنی"
+    
 
     context = {'rooms': rooms, 'topics': topics,
-               'room_count': room_count, 'room_messages': room_messages, 'pageInfo': pageInfo}
+               'room_count': room_count, 'room_messages': room_messages, 'pageInfo': pageInfo,}
     return render(request, 'base/home.html', context)
 
 
@@ -213,3 +214,4 @@ def activityPage(request):
 
 def aboutPage(request):
     return render(request, 'base/about.html')
+

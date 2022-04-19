@@ -66,4 +66,39 @@ if (photoInput)
 
 // Scroll to Bottom
 const conversationThread = document.querySelector(".room__box");
-if (conversationThread) conversationThread.scrollTop = conversationThread.scrollHeight;
+if (conversationThread)
+  conversationThread.scrollTop = conversationThread.scrollHeight;
+
+let lightMode = localStorage.getItem("lightMode");
+const darkModeToggle = document.querySelector("#dark-mode-toggle");
+
+// chek if dark mode is enabled
+// if its enabled, turn it off
+// if its disabled turn it on
+
+const enableLightMode = () => {
+  // 1. add the class light to the body
+  document.body.classList.add("light");
+  // 2. update lightMode in the LocalStorage
+  localStorage.setItem("lightMode", "enabled");
+};
+
+const disableLightMode = () => {
+  // 1. add the class light to the body
+  document.body.classList.remove("light");
+  // 2. update lightMode in the LocalStorage
+  localStorage.setItem("lightMode", null);
+};
+
+if (lightMode === "enabled") {
+  enableLightMode();
+}
+
+darkModeToggle.addEventListener("click", () => {
+  lightMode = localStorage.getItem("lightMode");
+  if (lightMode !== "enabled") {
+    enableLightMode();
+  } else {
+    disableLightMode();
+  }
+});

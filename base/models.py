@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -5,8 +6,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(unique=True, null=True)
+    theme = models.TextField(default="darkStyle.css")
     bio = models.TextField(null=True)
-
     avatar = models.ImageField(null=True, default="avatar.svg")
 
     USERNAME_FIELD = 'email'
@@ -49,3 +50,11 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+
+
+class Themes(models.Model):
+    light = models.TextField()
+
+
+    def __str__(self):
+        return  self.light
